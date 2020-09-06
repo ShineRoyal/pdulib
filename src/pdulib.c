@@ -6,8 +6,14 @@
 
 #include <stdio.h>
 
+
 #define DBG_TAG "pdulib"
+#ifdef PDULIB_DEBUG
 #define DBG_LVL DBG_LOG
+#else
+#define DBG_LVL DBG_INFO
+#endif
+
 #include <rtdbg.h>
 
 /**
