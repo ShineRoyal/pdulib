@@ -382,10 +382,8 @@ static rt_err_t get_UD_info(const char *data, DCS_t dcs, const uint8_t udl, char
     hexstr[length] = '\0';
     for (int i = 0; i < length; i++)
     {
-        LOG_D("ptr[%d]=>%s", i, ptr);
         hexstr2uint8_t(ptr, hexstr + i);
         ptr += 2;
-        LOG_D("hexstr[%d]=>0x%x", i, hexstr[i]);
     }
     //
     LOG_HEX("hexstr", 16, hexstr, strlen(hexstr));
