@@ -24,7 +24,7 @@ int pdu_make_english_sms_example(int argc, char** argv)
     if (smsb_obj == RT_NULL)
     {
         LOG_E("sms_submit_create_object failed!");
-        return;
+        return 0;
     }
 
     smsb_text = sms_submit_create(*smsb_obj);                               //创建字符串
