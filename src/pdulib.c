@@ -17,10 +17,10 @@
 #include <rtdbg.h>
 
 /**
- * hex×Ö·û´®×ªuint8_tÀàĞÍÊı¾İ
- * @param addr      ×Ö·û´®Ê×µØÖ·
- * @param value     ×ª»»½áÊøµÄÖµ
- * @return  ³É¹¦·µ»ØRT_EOK
+ * hexå­—ç¬¦ä¸²è½¬uint8_tç±»å‹æ•°æ®
+ * @param addr      å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param value     è½¬æ¢ç»“æŸçš„å€¼
+ * @return  æˆåŠŸè¿”å›RT_EOK
  */
 static int hexstr2uint8_t(const char *addr, uint8_t *value)
 {
@@ -45,10 +45,10 @@ static int hexstr2uint8_t(const char *addr, uint8_t *value)
 }
 
 /**
- * dec×Ö·û´®×ªuint8_tÀàĞÍÊı¾İ,½öÓÃÓÚ´¦ÀíSCTSÊ±ÖÓÊı¾İ
- * @param addr      ×Ö·û´®Ê×µØÖ·
- * @param value     ×ª»»½áÊøµÄÖµ
- * @return  ³É¹¦·µ»ØRT_EOK
+ * decå­—ç¬¦ä¸²è½¬uint8_tç±»å‹æ•°æ®,ä»…ç”¨äºå¤„ç†SCTSæ—¶é’Ÿæ•°æ®
+ * @param addr      å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param value     è½¬æ¢ç»“æŸçš„å€¼
+ * @return  æˆåŠŸè¿”å›RT_EOK
  */
 static int decstr2uint8_t(const char *addr, uint8_t *value)
 {
@@ -58,10 +58,10 @@ static int decstr2uint8_t(const char *addr, uint8_t *value)
 }
 
 /**
- * hex×Ö·û´®×ªºÅÂë×Ö·û´®
- * @param addr      ×Ö·û´®Ê×µØÖ·
- * @param length    ×Ö·û´®³¤¶È
- * @return  ×ª»»ºóµÄºÅÂë×Ö·û´®Ö¸Õë
+ * hexå­—ç¬¦ä¸²è½¬å·ç å­—ç¬¦ä¸²
+ * @param addr      å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param length    å­—ç¬¦ä¸²é•¿åº¦
+ * @return  è½¬æ¢åçš„å·ç å­—ç¬¦ä¸²æŒ‡é’ˆ
  */
 static char* hexstr2number(const char *addr, uint8_t length)
 {
@@ -83,18 +83,18 @@ static char* hexstr2number(const char *addr, uint8_t length)
 }
 
 /**
- * bit7Ñ¹Ëõ¸ñÊ½×Ö·û´®»¹Ô­³Éascii×Ö´®
- * @param bit7str       ´ı½âÂëµÄÑ¹Ëõ×Ö·û´®
- * @param uint8_tstr    ½âÂëºóµÄ×Ö·û´®
- * @param length        ´ı½âÂëµÄÑ¹Ëõ×Ö·û´®³¤¶È
- * @return  ·µ»Ø×ª»»Íê³ÉµÄuint8_tstr×Ö´®³¤¶È
+ * bit7å‹ç¼©æ ¼å¼å­—ç¬¦ä¸²è¿˜åŸæˆasciiå­—ä¸²
+ * @param bit7str       å¾…è§£ç çš„å‹ç¼©å­—ç¬¦ä¸²
+ * @param uint8_tstr    è§£ç åçš„å­—ç¬¦ä¸²
+ * @param length        å¾…è§£ç çš„å‹ç¼©å­—ç¬¦ä¸²é•¿åº¦
+ * @return  è¿”å›è½¬æ¢å®Œæˆçš„uint8_tstrå­—ä¸²é•¿åº¦
  */
 static size_t bit7str2uint8_tstr(const char *bit7str, char *uint8_tstr, int length)
 {
     uint8_t bit_pos = 0;
 
-    uint8_t s7_pos = 0; //bit7str×Ö´®Ë÷Òı
-    uint8_t s8_pos = 0; //uint8_tstr×Ö´®Ë÷Òı
+    uint8_t s7_pos = 0; //bit7strå­—ä¸²ç´¢å¼•
+    uint8_t s8_pos = 0; //uint8_tstrå­—ä¸²ç´¢å¼•
 
     uint8_tstr[s8_pos] = bit7str[s7_pos] & 0x7F;
 
@@ -103,34 +103,34 @@ static size_t bit7str2uint8_tstr(const char *bit7str, char *uint8_tstr, int leng
         if (s7_pos >= length)
             break;
 
-        if (bit_pos % 8 == 0)   //µÚ8*n´Î²»ĞèÒªÒÆÎ»
+        if (bit_pos % 8 == 0)   //ç¬¬8*næ¬¡ä¸éœ€è¦ç§»ä½
             bit_pos = 0;
         else
-            s7_pos++;           //ÆäËûÊ±ºò¶¼ÊÇ¿çbyteµÄ
+            s7_pos++;           //å…¶ä»–æ—¶å€™éƒ½æ˜¯è·¨byteçš„
 
         uint8_t big = (bit7str[s7_pos] << bit_pos);
         uint8_t small = (bit7str[s7_pos - 1] >> (8 - bit_pos));
         uint8_tstr[s8_pos] = (big | small) & 0x7F;
-        //µ±Êı¾İÁ¿½Ï¶àÊ±£¬´Ë´¦Ê¹ÓÃlogdÊä³öµ÷ÊÔĞÅÏ¢»á¿¨ËÀ
+        //å½“æ•°æ®é‡è¾ƒå¤šæ—¶ï¼Œæ­¤å¤„ä½¿ç”¨logdè¾“å‡ºè°ƒè¯•ä¿¡æ¯ä¼šå¡æ­»
         //rt_kprintf("s7_pos=>%d,bit_pos=>%d,big=>%x,small=>%x,uint8_tstr[%d]=>%x\n", s7_pos, bit_pos, big, small, s8_pos, uint8_tstr[s8_pos]);
     }
     return s8_pos;
 }
 
 /**
- * usc2×Ö·û´®¹ıÂËÖĞÎÄ£¬»¹Ô­³Éascii×Ö´®
- * @param usc2str       ´ı½âÂëµÄ×Ö·û´®
- * @param uint8_tstr    ½âÎöÍêµÄ×Ö·û´®
- * @param length        ´ı½âÂë×Ö·û´®³¤¶È
- * @return  ·µ»Ø×ª»»Íê³ÉµÄuint8_tstr×Ö´®³¤¶È
+ * usc2å­—ç¬¦ä¸²è¿‡æ»¤ä¸­æ–‡ï¼Œè¿˜åŸæˆasciiå­—ä¸²
+ * @param usc2str       å¾…è§£ç çš„å­—ç¬¦ä¸²
+ * @param uint8_tstr    è§£æå®Œçš„å­—ç¬¦ä¸²
+ * @param length        å¾…è§£ç å­—ç¬¦ä¸²é•¿åº¦
+ * @return  è¿”å›è½¬æ¢å®Œæˆçš„uint8_tstrå­—ä¸²é•¿åº¦
  */
 static size_t usc2str2uint8_tstr(const char *usc2str, char *uint8_tstr, int length)
 {
-    uint8_t s2_pos = 0; //usc2str×Ö´®Ë÷Òı
-    uint8_t s8_pos = 0; //uint8_tstr×Ö´®Ë÷Òı
+    uint8_t s2_pos = 0; //usc2strå­—ä¸²ç´¢å¼•
+    uint8_t s8_pos = 0; //uint8_tstrå­—ä¸²ç´¢å¼•
     for (; s2_pos < length; s2_pos = s2_pos + 2)
     {
-        if (usc2str[s2_pos] != 0)  //¸ßÎ»²»ÊÇ0£¬ÖĞÎÄ
+        if (usc2str[s2_pos] != 0)  //é«˜ä½ä¸æ˜¯0ï¼Œä¸­æ–‡
             continue;
         uint8_tstr[s8_pos] = usc2str[s2_pos + 1];
         s8_pos++;
@@ -139,50 +139,50 @@ static size_t usc2str2uint8_tstr(const char *usc2str, char *uint8_tstr, int leng
 }
 
 /**
- * ascii×Ö´®Ñ¹Ëõ³Ébit7¸ñÊ½×Ö·û´®
- * @param uint8_tstr    ´ıÑ¹ËõµÄ×Ö·û´®Ê×µØÖ·
- * @param bit7str       Ñ¹ËõºóµÄ×Ö·û´®Ê×µØÖ·
- * @param length        ´ıÑ¹ËõµÄ×Ö·û´®³¤¶È
- * @return  Ñ¹ËõºóµÄ³¤¶È
+ * asciiå­—ä¸²å‹ç¼©æˆbit7æ ¼å¼å­—ç¬¦ä¸²
+ * @param uint8_tstr    å¾…å‹ç¼©çš„å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param bit7str       å‹ç¼©åçš„å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param length        å¾…å‹ç¼©çš„å­—ç¬¦ä¸²é•¿åº¦
+ * @return  å‹ç¼©åçš„é•¿åº¦
  */
 static size_t uint8_tstr2bit7str(const char *uint8_tstr, char *bit7str, int length)
 {
     uint8_t bit_pos = 0;
 
-    uint8_t s7_pos = 0; //bit7str×Ö´®Ë÷Òı
-    uint8_t s8_pos = 0; //uint8_tstr×Ö´®Ë÷Òı
+    uint8_t s7_pos = 0; //bit7strå­—ä¸²ç´¢å¼•
+    uint8_t s8_pos = 0; //uint8_tstrå­—ä¸²ç´¢å¼•
     LOG_D("using bit7 encoding...");
     for (;; s8_pos++, bit_pos++)
     {
         if (s8_pos >= length)
             break;
 
-        if (bit_pos % 7 == 0)   //µÚ7*n´Î²»ĞèÒªÒÆÎ»
+        if (bit_pos % 7 == 0)   //ç¬¬7*næ¬¡ä¸éœ€è¦ç§»ä½
             bit_pos = 0;
         else
-            s7_pos++;           //ÆäËûÊ±ºò¶¼ÊÇ¿çbyteµÄ
+            s7_pos++;           //å…¶ä»–æ—¶å€™éƒ½æ˜¯è·¨byteçš„
 
         uint8_t small = uint8_tstr[s8_pos] >> bit_pos;
         uint8_t big = uint8_tstr[s8_pos + 1] << (7 - bit_pos);
         bit7str[s7_pos] = small | big;
 
-        //µ±Êı¾İÁ¿½Ï¶àÊ±£¬´Ë´¦Ê¹ÓÃlogdÊä³öµ÷ÊÔĞÅÏ¢»á¿¨ËÀ
+        //å½“æ•°æ®é‡è¾ƒå¤šæ—¶ï¼Œæ­¤å¤„ä½¿ç”¨logdè¾“å‡ºè°ƒè¯•ä¿¡æ¯ä¼šå¡æ­»
         //rt_kprintf("s7_pos=>%d,bit_pos=>%d,big=>%x,small=>%x,uint8_tstr[%d]=>%x\n", s7_pos, bit_pos, big, small, s8_pos, uint8_tstr[s8_pos]);
     }
     return s7_pos;
 }
 
 /**
- * ascii×Ö´®×ªusc2
- * @param uint8_tstr    ´ı±àÂëµÄ×Ö·û´®Ê×µØÖ·
- * @param usc2str       ±àÂëºóµÄ×Ö·û´®Ê×µØÖ·
- * @param length        ´ı±àÂëµÄ×Ö·û´®³¤¶È
- * @return  ±àÂëºóµÄ×Ö·û´®³¤¶È
+ * asciiå­—ä¸²è½¬usc2
+ * @param uint8_tstr    å¾…ç¼–ç çš„å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param usc2str       ç¼–ç åçš„å­—ç¬¦ä¸²é¦–åœ°å€
+ * @param length        å¾…ç¼–ç çš„å­—ç¬¦ä¸²é•¿åº¦
+ * @return  ç¼–ç åçš„å­—ç¬¦ä¸²é•¿åº¦
  */
 static size_t uint8_tstr2usc2str(const char *uint8_tstr, char *usc2str, int length)
 {
-    uint8_t s2_pos = 0; //usc2str×Ö´®Ë÷Òı
-    uint8_t s8_pos = 0; //uint8_tstr×Ö´®Ë÷Òı
+    uint8_t s2_pos = 0; //usc2strå­—ä¸²ç´¢å¼•
+    uint8_t s8_pos = 0; //uint8_tstrå­—ä¸²ç´¢å¼•
     LOG_D("using usc2 encoding...");
     for (; s8_pos < length; s8_pos++, s2_pos += 2)
     {
@@ -193,10 +193,10 @@ static size_t uint8_tstr2usc2str(const char *uint8_tstr, char *usc2str, int leng
 }
 
 /**
- * ½âÎöSCA¶ÌĞÅÏ¢ÖĞĞÄµØÖ·ĞÅÏ¢
- * @param data  ´ı½âÎöÊı¾İÊ×µØÖ·
- * @param sca   ½âÎö½á¹û
- * @return ½âÎö³É¹¦·µ»ØRT_EOK
+ * è§£æSCAçŸ­ä¿¡æ¯ä¸­å¿ƒåœ°å€ä¿¡æ¯
+ * @param data  å¾…è§£ææ•°æ®é¦–åœ°å€
+ * @param sca   è§£æç»“æœ
+ * @return è§£ææˆåŠŸè¿”å›RT_EOK
  */
 static rt_err_t get_SCA_info(const char *data, SCA_t *sca)
 {
@@ -205,7 +205,7 @@ static rt_err_t get_SCA_info(const char *data, SCA_t *sca)
     char *ptr = data;
 
     hexstr2uint8_t(ptr, &sca->len);
-    if (sca->len != 8)                //Í¨³£Çé¿öÏÂ³¤¶ÈÎª8£¬ÆäËûÇé¿öÏÈ²»¿¼ÂÇ
+    if (sca->len != 8)                //é€šå¸¸æƒ…å†µä¸‹é•¿åº¦ä¸º8ï¼Œå…¶ä»–æƒ…å†µå…ˆä¸è€ƒè™‘
     {
         ret = RT_EINVAL;
         goto __exit;
@@ -214,18 +214,18 @@ static rt_err_t get_SCA_info(const char *data, SCA_t *sca)
 
     ptr += 2;
     hexstr2uint8_t(ptr, &sca->type);
-    if (sca->type & 0x80 == 0)    //×î¸ßÎ»Ó¦¸ÃÎª1
+    if (sca->type & 0x80 == 0)    //æœ€é«˜ä½åº”è¯¥ä¸º1
     {
-        //bit6-bit4:ÊıÖµÀàĞÍ£¨Type of Number£©£º000¡ªÎ´Öª£¬001¡ª¹ú¼Ê£¬010¡ª¹úÄÚ,111¡ªÁô×÷À©Õ¹£»
-        //bit3-bit0:ºÅÂë¼ø±ğ£¨Numbering plan identification£©:0000¡ªÎ´Öª£¬0001¡ªISDN/µç»°ºÅÂë(E.164/E.163)£¬1111¡ªÁô×÷À©Õ¹£»
+        //bit6-bit4:æ•°å€¼ç±»å‹ï¼ˆType of Numberï¼‰ï¼š000â€”æœªçŸ¥ï¼Œ001â€”å›½é™…ï¼Œ010â€”å›½å†…,111â€”ç•™ä½œæ‰©å±•ï¼›
+        //bit3-bit0:å·ç é‰´åˆ«ï¼ˆNumbering plan identificationï¼‰:0000â€”æœªçŸ¥ï¼Œ0001â€”ISDN/ç”µè¯å·ç (E.164/E.163)ï¼Œ1111â€”ç•™ä½œæ‰©å±•ï¼›
         ret = RT_EINVAL;
         goto __exit;
     }
     LOG_D("sca->type=>0x%x", sca->type);
 
     ptr += 2;
-    number_len = sca->len - 1;                              //¶ÌĞÅÏ¢ÖĞĞÄºÅÂë=³¤¶È-ÀàĞÍ³¤¶È(1×Ö½Ú)
-    sca->number = hexstr2number(ptr, number_len * 2);       //1×Ö½Ú=2×Ö·û
+    number_len = sca->len - 1;                              //çŸ­ä¿¡æ¯ä¸­å¿ƒå·ç =é•¿åº¦-ç±»å‹é•¿åº¦(1å­—èŠ‚)
+    sca->number = hexstr2number(ptr, number_len * 2);       //1å­—èŠ‚=2å­—ç¬¦
     if (sca->number == RT_NULL)
     {
         ret = RT_EINVAL;
@@ -234,16 +234,16 @@ static rt_err_t get_SCA_info(const char *data, SCA_t *sca)
     LOG_D("sca->number=>%s", sca->number);
 
     __exit:
-//´íÎó´¦Àí
+//é”™è¯¯å¤„ç†
     return ret;
 
 }
 
 /**
- * ½âÎöĞ­ÒéÊı¾İµ¥ÔªÀàĞÍ
- * @param data  ´ı½âÎöÊı¾İÊ×µØÖ·
- * @param pdu   ½âÎö½á¹û
- * @return ½âÎö³É¹¦·µ»ØRT_EOK
+ * è§£æåè®®æ•°æ®å•å…ƒç±»å‹
+ * @param data  å¾…è§£ææ•°æ®é¦–åœ°å€
+ * @param pdu   è§£æç»“æœ
+ * @return è§£ææˆåŠŸè¿”å›RT_EOK
  */
 static rt_err_t get_PDUType_info(const char *data, PDUType_t *pdu)
 {
@@ -255,10 +255,10 @@ static rt_err_t get_PDUType_info(const char *data, PDUType_t *pdu)
 }
 
 /**
- * ½âÎöOA/DA·¢ËÍ·½µØÖ·/½ÓÊÕ·½µØÖ·ĞÅÏ¢
- * @param data  ´ı½âÎöÊı¾İÊ×µØÖ·
- * @param oada  ½âÎö½á¹û
- * @return ½âÎö³É¹¦·µ»ØRT_EOK
+ * è§£æOA/DAå‘é€æ–¹åœ°å€/æ¥æ”¶æ–¹åœ°å€ä¿¡æ¯
+ * @param data  å¾…è§£ææ•°æ®é¦–åœ°å€
+ * @param oada  è§£æç»“æœ
+ * @return è§£ææˆåŠŸè¿”å›RT_EOK
  */
 static rt_err_t get_OADA_info(const char *data, OA_DA_t *oada)
 {
@@ -271,20 +271,20 @@ static rt_err_t get_OADA_info(const char *data, OA_DA_t *oada)
 
     ptr += 2;
     hexstr2uint8_t(ptr, &oada->type);
-    if (oada->type & 0x80 == 0)    //×î¸ßÎ»Ó¦¸ÃÎª1
+    if (oada->type & 0x80 == 0)    //æœ€é«˜ä½åº”è¯¥ä¸º1
     {
-        //bit6-bit4:ÊıÖµÀàĞÍ£¨Type of Number£©£º000¡ªÎ´Öª£¬001¡ª¹ú¼Ê£¬010¡ª¹úÄÚ,111¡ªÁô×÷À©Õ¹£»
-        //bit3-bit0:ºÅÂë¼ø±ğ£¨Numbering plan identification£©:0000¡ªÎ´Öª£¬0001¡ªISDN/µç»°ºÅÂë(E.164/E.163)£¬1111¡ªÁô×÷À©Õ¹£»
+        //bit6-bit4:æ•°å€¼ç±»å‹ï¼ˆType of Numberï¼‰ï¼š000â€”æœªçŸ¥ï¼Œ001â€”å›½é™…ï¼Œ010â€”å›½å†…,111â€”ç•™ä½œæ‰©å±•ï¼›
+        //bit3-bit0:å·ç é‰´åˆ«ï¼ˆNumbering plan identificationï¼‰:0000â€”æœªçŸ¥ï¼Œ0001â€”ISDN/ç”µè¯å·ç (E.164/E.163)ï¼Œ1111â€”ç•™ä½œæ‰©å±•ï¼›
         ret = RT_EINVAL;
         goto __exit;
     }
     LOG_D("oada->type=>0x%x", oada->type);
 
     ptr += 2;
-    number_len = oada->len;                                 //¶ÌĞÅÏ¢ÖĞĞÄºÅÂë=³¤¶È-ÀàĞÍ³¤¶È(1×Ö½Ú)
+    number_len = oada->len;                                 //çŸ­ä¿¡æ¯ä¸­å¿ƒå·ç =é•¿åº¦-ç±»å‹é•¿åº¦(1å­—èŠ‚)
     if (number_len % 2)
-        number_len += 1;                                    //µ±³¤¶ÈÎªÆæÊıÊ±£¬ĞèÒª°ÑºóÃæµÄFÒ²¶Á³öÀ´
-    oada->number = hexstr2number(ptr, number_len);          //1×Ö½Ú=2×Ö·û
+        number_len += 1;                                    //å½“é•¿åº¦ä¸ºå¥‡æ•°æ—¶ï¼Œéœ€è¦æŠŠåé¢çš„Fä¹Ÿè¯»å‡ºæ¥
+    oada->number = hexstr2number(ptr, number_len);          //1å­—èŠ‚=2å­—ç¬¦
     if (oada->number == RT_NULL)
     {
         ret = RT_EINVAL;
@@ -293,15 +293,15 @@ static rt_err_t get_OADA_info(const char *data, OA_DA_t *oada)
     LOG_D("oada->number=>%s", oada->number);
 
     __exit:
-//´íÎó´¦Àí
+//é”™è¯¯å¤„ç†
     return ret;
 
 }
 
 /**
- * ½âÎöPID²ÎÊı
- * @param data  PID²ÎÊıµØÖ·
- * @param pid   ½âÎöºóµÄÖµ
+ * è§£æPIDå‚æ•°
+ * @param data  PIDå‚æ•°åœ°å€
+ * @param pid   è§£æåçš„å€¼
  * @return
  */
 static rt_err_t get_PID_info(const char *data, PID_t *pid)
@@ -314,9 +314,9 @@ static rt_err_t get_PID_info(const char *data, PID_t *pid)
 }
 
 /**
- * ½âÎöDCS²ÎÊı
- * @param data  DCS²ÎÊıµØÖ·
- * @param dcs   ½âÎöºóµÄÖµ
+ * è§£æDCSå‚æ•°
+ * @param data  DCSå‚æ•°åœ°å€
+ * @param dcs   è§£æåçš„å€¼
  * @return
  */
 static rt_err_t get_DCS_info(const char *data, DCS_t *dcs)
@@ -329,9 +329,9 @@ static rt_err_t get_DCS_info(const char *data, DCS_t *dcs)
 }
 
 /**
- * ½âÎöSCTS²ÎÊı
- * @param data  SCTS²ÎÊıµØÖ·
- * @param scts  ½âÎöºóµÄÖµ
+ * è§£æSCTSå‚æ•°
+ * @param data  SCTSå‚æ•°åœ°å€
+ * @param scts  è§£æåçš„å€¼
  * @return
  */
 static rt_err_t get_SCTS_info(const char *data, SCTS_VP_t *scts)
@@ -356,9 +356,9 @@ static rt_err_t get_SCTS_info(const char *data, SCTS_VP_t *scts)
 }
 
 /**
- * ½âÎöÊı¾İ³¤¶È¼°ÄÚÈİ
- * @param data  UDL²ÎÊıµØÖ·
- * @param udl   UDLµÄÖµ
+ * è§£ææ•°æ®é•¿åº¦åŠå†…å®¹
+ * @param data  UDLå‚æ•°åœ°å€
+ * @param udl   UDLçš„å€¼
  * @return
  */
 static rt_err_t get_UDL_info(const char *data, uint8_t *udl)
@@ -371,19 +371,19 @@ static rt_err_t get_UDL_info(const char *data, uint8_t *udl)
 }
 
 /**
- * ½âÎöÊı¾İÄÚÈİ
- * @param data  PDU¸ñÊ½Êı¾İÖ¸ÕëÊ×µØÖ·
- * @param dcs   Ğ­ÒéÀàĞÍ
- * @param udl   Êı¾İ³¤¶È
- * @param ud    ·µ»ØµÄÊı¾İ
- * @return  ½âÎö³É¹¦·µ»ØRT_EOK
+ * è§£ææ•°æ®å†…å®¹
+ * @param data  PDUæ ¼å¼æ•°æ®æŒ‡é’ˆé¦–åœ°å€
+ * @param dcs   åè®®ç±»å‹
+ * @param udl   æ•°æ®é•¿åº¦
+ * @param ud    è¿”å›çš„æ•°æ®
+ * @return  è§£ææˆåŠŸè¿”å›RT_EOK
  */
 static rt_err_t get_UD_info(const char *data, DCS_t dcs, const uint8_t udl, char **ud)
 {
     char *ptr = data;
     int length = strlen(ptr);
     LOG_D("ud=>%s", ptr);
-    char *hexstr = RT_NULL;    //ÏÈ°Ñascii¸ñÊ½µÄdata×ª³Éhex
+    char *hexstr = RT_NULL;    //å…ˆæŠŠasciiæ ¼å¼çš„dataè½¬æˆhex
     hexstr = rt_malloc(length + 1);
     hexstr[length] = '\0';
     for (int i = 0; i < length; i++)
@@ -403,10 +403,10 @@ static rt_err_t get_UD_info(const char *data, DCS_t dcs, const uint8_t udl, char
         break;
     case 2: //USC2
         *ud = rt_calloc(udl, sizeof(char));
-        /*ÒÔÏÂÁ½ÖÖÇé¿ö¶şÑ¡Ò»*/
-        /*1.Õë¶ÔÄ³Ğ©Æ½Ì¨ÏÂ·¢µÄ¶ÌĞÅ»áÓĞÖĞÎÄµÄÇé¿ö£¬Ö±½Ó¹ıÂËµôÆäÖĞµÄÖĞÎÄ£¬µÃµ½´¿Ó¢ÎÄµÄÖ¸Áî*/
+        /*ä»¥ä¸‹ä¸¤ç§æƒ…å†µäºŒé€‰ä¸€*/
+        /*1.é’ˆå¯¹æŸäº›å¹³å°ä¸‹å‘çš„çŸ­ä¿¡ä¼šæœ‰ä¸­æ–‡çš„æƒ…å†µï¼Œç›´æ¥è¿‡æ»¤æ‰å…¶ä¸­çš„ä¸­æ–‡ï¼Œå¾—åˆ°çº¯è‹±æ–‡çš„æŒ‡ä»¤*/
         usc2str2uint8_tstr(hexstr, *ud, udl);
-        /*2./Èç¹ûÓÃ»§ĞèÒª×ÔĞĞ´¦Àíusc2±àÂëµÄÖĞÎÄ£¬ÕâÀïÖ±½Ómemcpy£¬´ıÓÃ»§×ÔĞĞ´¦Àí*/
+        /*2./å¦‚æœç”¨æˆ·éœ€è¦è‡ªè¡Œå¤„ç†usc2ç¼–ç çš„ä¸­æ–‡ï¼Œè¿™é‡Œç›´æ¥memcpyï¼Œå¾…ç”¨æˆ·è‡ªè¡Œå¤„ç†*/
         //memcpy(*ud, hexstr, udl);
         LOG_HEX("usc2", 16, *ud, strlen(*ud));
         break;
@@ -418,9 +418,9 @@ static rt_err_t get_UD_info(const char *data, DCS_t dcs, const uint8_t udl, char
 }
 
 /**
- * ºÅÂë×ªhex×Ö·û´®
- * @param dsc   ×ª»»ºó´æ´¢µØÖ·
- * @param src   numberµØÖ·
+ * å·ç è½¬hexå­—ç¬¦ä¸²
+ * @param dsc   è½¬æ¢åå­˜å‚¨åœ°å€
+ * @param src   numberåœ°å€
  * @return
  */
 static rt_err_t number2hexstr(char *dsc, const char *src)
@@ -432,7 +432,7 @@ static rt_err_t number2hexstr(char *dsc, const char *src)
         dsc[index] = src[index + 1];
         dsc[index + 1] = src[index];
     }
-    if (length % 2) //³¤¶ÈÎªÆæÊı£¬Ö»ĞèÒª²¹F
+    if (length % 2) //é•¿åº¦ä¸ºå¥‡æ•°ï¼Œåªéœ€è¦è¡¥F
     {
         dsc[length - 1] = 'F';
     }
@@ -440,9 +440,9 @@ static rt_err_t number2hexstr(char *dsc, const char *src)
 }
 
 /**
- * ´´½¨SCA×Ö·û´®
- * @param data  ´æ·ÅSCA×Ö·û´®µÄµØÖ·
- * @param sca   SCA²ÎÊı
+ * åˆ›å»ºSCAå­—ç¬¦ä¸²
+ * @param data  å­˜æ”¾SCAå­—ç¬¦ä¸²çš„åœ°å€
+ * @param sca   SCAå‚æ•°
  * @return
  */
 static rt_err_t create_SCA_info(char* data, SCA_t sca)
@@ -456,9 +456,9 @@ static rt_err_t create_SCA_info(char* data, SCA_t sca)
 }
 
 /**
- * ´´½¨DA×Ö·û´®
- * @param data  ´æ·ÅDA×Ö·û´®µÄµØÖ·
- * @param da   DA²ÎÊı
+ * åˆ›å»ºDAå­—ç¬¦ä¸²
+ * @param data  å­˜æ”¾DAå­—ç¬¦ä¸²çš„åœ°å€
+ * @param da   DAå‚æ•°
  * @return
  */
 static rt_err_t create_DA_info(char* data, OA_DA_t da)
@@ -472,9 +472,9 @@ static rt_err_t create_DA_info(char* data, OA_DA_t da)
 }
 
 /**
- * ´´½¨VP×Ö·û´®
- * @param dst   Ä¿±êµØÖ·
- * @param scts  ÓĞĞ§ÆÚÊ±ÖÓ½á¹¹Ìå
+ * åˆ›å»ºVPå­—ç¬¦ä¸²
+ * @param dst   ç›®æ ‡åœ°å€
+ * @param scts  æœ‰æ•ˆæœŸæ—¶é’Ÿç»“æ„ä½“
  * @return
  */
 static rt_err_t create_VPabs_info(char* dst, SCTS_VP_t scts)
@@ -497,53 +497,53 @@ static rt_err_t create_VPabs_info(char* dst, SCTS_VP_t scts)
 }
 
 /**
- *   ´´½¨VP×Ö·û´®£¬Ïà¶ÔÊ±¼ä
- * @param dst           ´æ·ÅµØÖ·
- * @param per5minute    ¶àÉÙ·ÖÖÓ
+ *   åˆ›å»ºVPå­—ç¬¦ä¸²ï¼Œç›¸å¯¹æ—¶é—´
+ * @param dst           å­˜æ”¾åœ°å€
+ * @param per5minute    å¤šå°‘åˆ†é’Ÿ
  * @return
  */
 static rt_err_t create_VPrel_info(char *dst, uint32_t minute)
 {
     char *ptr = dst;
     uint8_t value = 0;
-    if (minute <= 720)          //144*5min=12Ğ¡Ê±
+    if (minute <= 720)          //144*5min=12å°æ—¶
         value = minute / 5 - 1;             //(vp+1)*5min
-    else if (minute <= 1440)     //24Ğ¡Ê±
+    else if (minute <= 1440)     //24å°æ—¶
         value = (minute - 720) / 30 + 143;  //12hour+(vp-143)*30min
-    else if (minute <= 43200)    //30Ìì
+    else if (minute <= 43200)    //30å¤©
         value = (minute / 1440 + 166);      //(vp-166)*1day
     else if (minute <= 635040)
         value = (minute / 10080) + 192;     //(vp-192)*1week
     else
-        LOG_E("time overflow");             //Ïà¶ÔÖµ´íÎó
+        LOG_E("time overflow");             //ç›¸å¯¹å€¼é”™è¯¯
     sprintf(ptr, "%2X", value);
 }
 
 /**
- * ´´½¨UserData×Ö·û´®
- * @param dst   Ä¿±êµØÖ·
- * @param dcs   dcs²ÎÊı£¬±£´æÁË±àÂë
- * @param udl   Êı¾İ³¤¶È
- * @param ud    ´æ·ÅÊı¾İµÄÊ×µØÖ·
+ * åˆ›å»ºUserDataå­—ç¬¦ä¸²
+ * @param dst   ç›®æ ‡åœ°å€
+ * @param dcs   dcså‚æ•°ï¼Œä¿å­˜äº†ç¼–ç 
+ * @param udl   æ•°æ®é•¿åº¦
+ * @param ud    å­˜æ”¾æ•°æ®çš„é¦–åœ°å€
  * @return
  */
 static rt_err_t create_UD_info(char *dst, DCS_t dcs, uint8_t datalength, char *userdata)
 {
-    int udl = datalength;                 //±àÂëÑ¹ËõºóµÄÊµ¼Ê³¤¶È£¬Ò²¾ÍÊÇÊµ¼Êudl,ÕâÀïÏÈµÈÓÚdatalength£¬Èç¹ûÓÃ»§´¦Àí´¿ÖĞÎÄ
+    int udl = datalength;                 //ç¼–ç å‹ç¼©åçš„å®é™…é•¿åº¦ï¼Œä¹Ÿå°±æ˜¯å®é™…udl,è¿™é‡Œå…ˆç­‰äºdatalengthï¼Œå¦‚æœç”¨æˆ·å¤„ç†çº¯ä¸­æ–‡
     char *hexstr = RT_NULL;
     hexstr = rt_calloc(256, sizeof(char));
     switch (dcs.dcs_t.Encode)
     {
     case 0: //7bit
-        datalength = datalength > 140 ? 140 : datalength; //7bitÄ£Ê½ÏÂ£¬¶ÌĞÅ³¤¶È²»³¬¹ı140
+        datalength = datalength > 140 ? 140 : datalength; //7bitæ¨¡å¼ä¸‹ï¼ŒçŸ­ä¿¡é•¿åº¦ä¸è¶…è¿‡140
         udl = uint8_tstr2bit7str(userdata, hexstr, datalength);
         break;
     case 2: //USC2
-        datalength = datalength > 70 ? 70 : datalength; //usc2Ä£Ê½ÏÂ£¬¶ÌĞÅ³¤¶È²»³¬¹ı70
-        /*ÒÔÏÂ2ÖÖÇé¿ö¶şÑ¡Ò»*/
-        /*1.Ä¬ÈÏ·¢ËÍµÄ×Ö·û´®ÊÇ´¿Ó¢ÎÄ*/
+        datalength = datalength > 70 ? 70 : datalength; //usc2æ¨¡å¼ä¸‹ï¼ŒçŸ­ä¿¡é•¿åº¦ä¸è¶…è¿‡70
+        /*ä»¥ä¸‹2ç§æƒ…å†µäºŒé€‰ä¸€*/
+        /*1.é»˜è®¤å‘é€çš„å­—ç¬¦ä¸²æ˜¯çº¯è‹±æ–‡*/
         udl = uint8_tstr2usc2str(userdata, hexstr, datalength);
-        /*2.Èç¹ûÊÇUSC2±àÂë´øÖĞÎÄ£¬ÕâÀïÖ±½Ómemcpy*/
+        /*2.å¦‚æœæ˜¯USC2ç¼–ç å¸¦ä¸­æ–‡ï¼Œè¿™é‡Œç›´æ¥memcpy*/
         //memcpy(dst, userdata, datalength);
         break;
     default:
@@ -559,7 +559,7 @@ static rt_err_t create_UD_info(char *dst, DCS_t dcs, uint8_t datalength, char *u
 }
 
 /**
- * ÊÍ·Åsms_data_tÖ¸Õë¼°³ÉÔ±Ö¸ÕëÖ¸ÏòµÄ¿Õ¼ä
+ * é‡Šæ”¾sms_data_tæŒ‡é’ˆåŠæˆå‘˜æŒ‡é’ˆæŒ‡å‘çš„ç©ºé—´
  * @param sms
  */
 void sms_submit_free(SMS_Submit_t *sms)
@@ -571,7 +571,7 @@ void sms_submit_free(SMS_Submit_t *sms)
 }
 
 /**
- * ÊÍ·Åsms_data_tÖ¸Õë¼°³ÉÔ±Ö¸ÕëÖ¸ÏòµÄ¿Õ¼ä
+ * é‡Šæ”¾sms_data_tæŒ‡é’ˆåŠæˆå‘˜æŒ‡é’ˆæŒ‡å‘çš„ç©ºé—´
  * @param sms
  */
 void sms_deliver_free(SMS_Deliver_t *sms)
@@ -583,9 +583,9 @@ void sms_deliver_free(SMS_Deliver_t *sms)
 }
 
 /**
- * ½âÎö½ÓÊÕ·½PDU¸ñÊ½Êı¾İ
- * @param data      À´×Ô¶ÌĞÅÄ£¿éµÄÊı¾İ
- * @return  ½âÎöºóµÄsms_data_t½á¹¹ÌåÖ¸Õë
+ * è§£ææ¥æ”¶æ–¹PDUæ ¼å¼æ•°æ®
+ * @param data      æ¥è‡ªçŸ­ä¿¡æ¨¡å—çš„æ•°æ®
+ * @return  è§£æåçš„sms_data_tç»“æ„ä½“æŒ‡é’ˆ
  */
 SMS_Deliver_t* sms_deliver_parse(const char *data)
 {
@@ -620,7 +620,7 @@ SMS_Deliver_t* sms_deliver_parse(const char *data)
     }
 
     data += 4;
-    data += (sms->oa.len % 2) ? (sms->oa.len + 1) : sms->oa.len;    //Èç¹ûÎªÆæÊıĞèÒª¿¼ÂÇF
+    data += (sms->oa.len % 2) ? (sms->oa.len + 1) : sms->oa.len;    //å¦‚æœä¸ºå¥‡æ•°éœ€è¦è€ƒè™‘F
     if (get_PID_info(data, &sms->pid) != RT_EOK)
     {
         err_code = 5;
@@ -657,7 +657,7 @@ SMS_Deliver_t* sms_deliver_parse(const char *data)
 
     LOG_D("parse ok\n");
     __exit:
-//Èç¹ûÃ»ÓĞ´íÎóÖ±½Ó·µ»Ø£¬·ñÔò·µ»ØRT_NULL
+//å¦‚æœæ²¡æœ‰é”™è¯¯ç›´æ¥è¿”å›ï¼Œå¦åˆ™è¿”å›RT_NULL
     if (err_code == RT_EOK)
         return sms;
 
@@ -667,9 +667,9 @@ SMS_Deliver_t* sms_deliver_parse(const char *data)
 }
 
 /**
- * ´´½¨·¢ËÍ·½PDU¸ñÊ½Êı¾İ
- * @param sms   ´æ·ÅÊı¾İµÄ½á¹¹Ìå
- * @return  ·µ»Ø´´½¨µÄ×Ö·û´®
+ * åˆ›å»ºå‘é€æ–¹PDUæ ¼å¼æ•°æ®
+ * @param sms   å­˜æ”¾æ•°æ®çš„ç»“æ„ä½“
+ * @return  è¿”å›åˆ›å»ºçš„å­—ç¬¦ä¸²
  */
 char *sms_submit_create(SMS_Submit_t sms)
 {
@@ -680,7 +680,7 @@ char *sms_submit_create(SMS_Submit_t sms)
 
     ptr = sms_str;
 //    create_SCA_info(ptr, sms.sca);
-    sprintf(ptr, "%02X", 0);            //·¢ËÍÊ±£¬sca¿ÉÒÔÖ±½ÓĞ´0£¬Ó²¼ş»á×Ô¶¯¶ÁÈ¡¶ÌĞÅÖĞĞÄµØÖ·
+    sprintf(ptr, "%02X", 0);            //å‘é€æ—¶ï¼Œscaå¯ä»¥ç›´æ¥å†™0ï¼Œç¡¬ä»¶ä¼šè‡ªåŠ¨è¯»å–çŸ­ä¿¡ä¸­å¿ƒåœ°å€
     ptr += strlen(ptr);
     sprintf(ptr, "%02X", sms.pdu.byte);
     ptr += 2;
@@ -692,16 +692,16 @@ char *sms_submit_create(SMS_Submit_t sms)
     ptr += 2;
     sprintf(ptr, "%02X", sms.dcs.byte);
     ptr += 2;
-    if (sms.pdu.submit.VPF == 2)        //02Ïà¶ÔµÄ
+    if (sms.pdu.submit.VPF == 2)        //02ç›¸å¯¹çš„
     {
         create_VPrel_info(ptr, sms.vp.rel);
         ptr += 2;
     }
-    else if (sms.pdu.submit.VPF == 3)   //03:¾ø¶ÔµÄ
+    else if (sms.pdu.submit.VPF == 3)   //03:ç»å¯¹çš„
     {
         create_VPabs_info(ptr, sms.vp.abs);
         ptr += strlen(ptr);
-    }                                   //00-Ã»ÓĞVP¶Î£¬01-±£Áô¡£ÕâÀï¾ù²»×÷´¦Àí
+    }                                   //00-æ²¡æœ‰VPæ®µï¼Œ01-ä¿ç•™ã€‚è¿™é‡Œå‡ä¸ä½œå¤„ç†
     sprintf(ptr, "%02X", sms.user_data_length);
     ptr += 2;
     create_UD_info(ptr, sms.dcs, sms.user_data_length, sms.user_data);
@@ -710,15 +710,15 @@ char *sms_submit_create(SMS_Submit_t sms)
 }
 
 /**
- * ¿ìËÙ´´½¨Ò»¸öÓ¢ÎÄÄÚÈİµÄ·¢ËÍPDU¶ÔÏó
- * @param da_number ¶Ô·½µç»°ºÅÂë
- * @param user_data ×Ö·û´®ÄÚÈİ
- * @return  ·µ»Ø¶ÔÏó
+ * å¿«é€Ÿåˆ›å»ºä¸€ä¸ªè‹±æ–‡å†…å®¹çš„å‘é€PDUå¯¹è±¡
+ * @param da_number å¯¹æ–¹ç”µè¯å·ç 
+ * @param user_data å­—ç¬¦ä¸²å†…å®¹
+ * @return  è¿”å›å¯¹è±¡
  */
 SMS_Submit_t* sms_submit_create_english_object(const char *da_number, const char *user_data)
 {
     char sca_number[] = "8613010811500";
-    //8613010811500ÎªËÄ´¨ÁªÍ¨¶ÌĞÅÖĞĞÄºÅÂë
+    //8613010811500ä¸ºå››å·è”é€šçŸ­ä¿¡ä¸­å¿ƒå·ç 
     SMS_Submit_t *sms_sub = RT_NULL;
     sms_sub = rt_calloc(1, sizeof(SMS_Submit_t));
     sms_sub->sca.len = 8;
@@ -734,7 +734,7 @@ SMS_Submit_t* sms_submit_create_english_object(const char *da_number, const char
     sms_sub->da.number = rt_calloc(strlen(da_number) + 1, sizeof(char));
     memcpy(sms_sub->da.number, da_number, strlen(da_number));
     sms_sub->pid.byte = 0;
-    sms_sub->dcs.byte = 0;  //Ó¢ÎÄ
+    sms_sub->dcs.byte = 0;  //è‹±æ–‡
 
     sms_sub->vp.rel = 1440;
     sms_sub->user_data_length = strlen(user_data);
@@ -744,15 +744,15 @@ SMS_Submit_t* sms_submit_create_english_object(const char *da_number, const char
 }
 
 /**
- * ¿ìËÙ´´½¨Ò»¸öÖĞÎÄÄÚÈİµÄ·¢ËÍPDU¶ÔÏó
- * @param da_number ¶Ô·½µç»°ºÅÂë
- * @param user_data ×Ö·û´®ÄÚÈİ
+ * å¿«é€Ÿåˆ›å»ºä¸€ä¸ªä¸­æ–‡å†…å®¹çš„å‘é€PDUå¯¹è±¡
+ * @param da_number å¯¹æ–¹ç”µè¯å·ç 
+ * @param user_data å­—ç¬¦ä¸²å†…å®¹
  * @return
  */
 SMS_Submit_t* sms_submit_create_chinese_object(const char *da_number, const char *user_data)
 {
     char sca_number[] = "8613010811500";
-    //8613010811500ÎªËÄ´¨ÁªÍ¨¶ÌĞÅÖĞĞÄºÅÂë
+    //8613010811500ä¸ºå››å·è”é€šçŸ­ä¿¡ä¸­å¿ƒå·ç 
     SMS_Submit_t *sms_sub = RT_NULL;
     sms_sub = rt_calloc(1, sizeof(SMS_Submit_t));
     sms_sub->sca.len = 8;
@@ -768,7 +768,7 @@ SMS_Submit_t* sms_submit_create_chinese_object(const char *da_number, const char
     sms_sub->da.number = rt_calloc(strlen(da_number) + 1, sizeof(char));
     memcpy(sms_sub->da.number, da_number, strlen(da_number));
     sms_sub->pid.byte = 0;
-    sms_sub->dcs.byte = 0x08;   //ÖĞÎÄ
+    sms_sub->dcs.byte = 0x08;   //ä¸­æ–‡
 
     sms_sub->vp.rel = 1440;
     sms_sub->user_data_length = strlen(user_data);
