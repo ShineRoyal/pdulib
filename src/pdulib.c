@@ -156,7 +156,7 @@ static size_t uint8_tstr2bit7str(const char *uint8_tstr, char *bit7str, int leng
         if (s8_pos >= length)
             break;
 
-        if (bit_pos % 7 == 0)   //第7*n次不需要移位
+        if (bit_pos % 8 == 0)   //第8*n次不需要移位
             bit_pos = 0;
         else
             s7_pos++;           //其他时候都是跨byte的
