@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 
-
 #define DBG_TAG "pdulib"
 #ifdef PDULIB_DEBUG
 #define DBG_LVL DBG_LOG
@@ -169,7 +168,7 @@ static size_t uint8_tstr2bit7str(const char *uint8_tstr, char *bit7str, int leng
         //当数据量较多时，此处使用logd输出调试信息会卡死
         //rt_kprintf("s7_pos=>%d,bit_pos=>%d,big=>%x,small=>%x,uint8_tstr[%d]=>%x\n", s7_pos, bit_pos, big, small, s8_pos, uint8_tstr[s8_pos]);
     }
-    return s7_pos;
+    return s7_pos + 1;
 }
 
 /**
@@ -189,7 +188,7 @@ static size_t uint8_tstr2usc2str(const char *uint8_tstr, char *usc2str, int leng
         usc2str[s2_pos] = 0;
         usc2str[s2_pos + 1] = uint8_tstr[s8_pos];
     }
-    return s2_pos;
+    return s2_pos + 1;
 }
 
 /**
