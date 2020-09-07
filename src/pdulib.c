@@ -553,7 +553,7 @@ static rt_err_t create_UD_info(char *dst, DCS_t dcs, uint8_t datalength, char *u
         sprintf(dst, "%02X", hexstr[i]);
         dst += 2;
     }
-
+    rt_free(hexstr);
     return RT_EOK;
 }
 
